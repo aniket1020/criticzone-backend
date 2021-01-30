@@ -14,4 +14,5 @@ def index():
     movies = db.execute(
         'SELECT * FROM movies'
     ).fetchall()
-    return render_template('index.html', vars={'movies':movies,'name':'Aniket'})
+    print(movies)
+    return render_template('index.html', vars={'movies':movies,'name':'Homepage'})

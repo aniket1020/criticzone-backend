@@ -2,9 +2,13 @@
 <html>
 <title>HOMEPAGE</title>
 <body>
-        This is Sample PAGE
-      <h1>Hello {{ vars['name'] }}!</h1>
+      <h1>{{ vars['name'] }}!</h1>
       <h2>MOVIES</h2>
-        {{ vars['movies'][0]['user_email'] }}
+        {% for movie in vars['movies'] %}
+            <div>
+                <img src="{{ movie['movie_wallpaper'] }}"/>
+                {{ movie['movie_name'] }}
+            </div>
+        {% endfor %}
    </body>
 </html>
