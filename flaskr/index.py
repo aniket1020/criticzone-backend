@@ -22,10 +22,10 @@ def show_movie(movie_id):
     db = get_db()
     if request.method == 'GET':
         movie = db.execute(
-            'SELECT * FROM movies WHERE movie_id = ?',(movie_id)
+            'SELECT * FROM movies WHERE movie_id = ?',(movie_id,)
         ).fetchone()
         reviews = db.execute(
-            'SELECT * FROM reviews WHERE movie_id = ?',(movie_id)
+            'SELECT * FROM reviews WHERE movie_id = ?',(movie_id,)
         ).fetchall()
         #Render Template
         return render_template('movie.html',vars={'movie':movie,'reviews':reviews})
@@ -40,21 +40,21 @@ def show_movie(movie_id):
         else:
             db.execute(
                 'INSERT INTO reviews values (?,?)',
-                (request.session['user_id'],movie_id)
+                (request.session['user_id'],movie_id,)
             )
             db.commit()
             #Update Template
     elif request.method == 'PUT':
         db.execute(
             'UPDATE reviews SET user_review = ?, user_rating = ? where user_id = ? and movie_id = ?',
-            (request.form['user_review'],request.form['user_rating'],request.session['user_id'],movie_id)
+            (request.form['user_review'],request.form['user_rating'],request.session['user_id'],movie_id,)
         )
         db.commit()
         #Update Template
     elif request.method == 'DELETE':
         db.execute(
             'DELETE from reviews where user_id = ? and movie_id = ?',
-            (request.session['user_id'], movie_id)
+            (request.session['user_id'], movie_id,)
         )
         db.commit()
         # Update Template
@@ -65,11 +65,11 @@ def show_wishlist():
     db = get_db()
     wishlist = db.execute(
         'SELECT * from wishlist where user_id = ?',
-        (request.session['user_id'])
+        (request.session['user_id'],)
     ).fetchall()
     movies = []
     for id in wishlist['movie_id']:
-        movies.append(db.execute('SELECT * from movies where movie_id = ?',(id)))
+        movies.append(db.execute('SELECT * from movies where movie_id = ?',(id,)))
     #render Template
     return render_template('',vars = {'movies':movies})
 
@@ -80,22 +80,22 @@ def delete_movie_wishlist(movie_id):
         db = get_db()
         db.execute(
             'INSERT into wishlist values (?,?)',
-            (request.session['user_id'],movie_id)
+            (request.session['user_id'],movie_id,)
         )
         db.commit()
     else:
         db = get_db()
         db.execute(
             'DELETE from wishlist where user_id = ? and movie_id = ?',
-            (request.session['user_id'], movie_id)
+            (request.session['user_id'], movie_id,)
         )
         db.commit()
         wishlist = db.execute(
             'SELECT * from wishlist where user_id = ?',
-            (request.session['user_id'])
+            (request.session['user_id'],)
         ).fetchall()
         movies = []
         for id in wishlist['movie_id']:
-            movies.append(db.execute('SELECT * from movies where movie_id = ?', (id)))
+            movies.append(db.execute('SELECT * from movies where movie_id = ?', (id,)))
         # render Template
         return render_template('', vars={'movies': movies})
