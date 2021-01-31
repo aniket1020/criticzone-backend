@@ -73,21 +73,29 @@ def show_wishlist():
     #render Template
     return render_template('',vars = {'movies':movies})
 
-@bp.route('/wishlist/<int:movie_id>',methods=['DELETE'])
+@bp.route('/wishlist/<int:movie_id>',methods=['POST','DELETE'])
 @login_required
 def delete_movie_wishlist(movie_id):
-    db = get_db()
-    db.execute(
-        'DELETE from wishlist where user_id = ? and movie_id = ?',
-        (request.session['user_id'], movie_id)
-    )
-    db.commit()
-    wishlist = db.execute(
-        'SELECT * from wishlist where user_id = ?',
-        (request.session['user_id'])
-    ).fetchall()
-    movies = []
-    for id in wishlist['movie_id']:
-        movies.append(db.execute('SELECT * from movies where movie_id = ?', (id)))
-    # render Template
-    return render_template('', vars={'movies': movies})
+    if request.method == 'POST':
+        db = get_db()
+        db.execute(
+            'INSERT into wishlist values (?,?)',
+            (request.session['user_id'],movie_id)
+        )
+        db.commit()
+    else:
+        db = get_db()
+        db.execute(
+            'DELETE from wishlist where user_id = ? and movie_id = ?',
+            (request.session['user_id'], movie_id)
+        )
+        db.commit()
+        wishlist = db.execute(
+            'SELECT * from wishlist where user_id = ?',
+            (request.session['user_id'])
+        ).fetchall()
+        movies = []
+        for id in wishlist['movie_id']:
+            movies.append(db.execute('SELECT * from movies where movie_id = ?', (id)))
+        # render Template
+        return render_template('', vars={'movies': movies})
