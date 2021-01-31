@@ -9,6 +9,7 @@ from flaskr.db import get_db
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
+
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
     if request.method == 'POST':
@@ -22,13 +23,13 @@ def register():
         elif not user_password:
             error = 'Password is required.'
         elif db.execute(
-            'SELECT user_id FROM user WHERE user_email = ?', (user_email)
+            'SELECT user_id FROM users WHERE user_email = ?', (user_email)
         ).fetchone() is not None:
             error = 'User {} is already registered.'.format(user_email)
 
         if error is None:
             db.execute(
-                'INSERT INTO user (user_email, user_password) VALUES (?, ?)',
+                'INSERT INTO users (user_email, user_password) VALUES (?, ?)',
                 (user_email, generate_password_hash(user_password))
             )
             db.commit()
@@ -37,6 +38,7 @@ def register():
         flash(error)
 
     return render_template('register.html')
+
 
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
@@ -61,6 +63,7 @@ def login():
         flash(error)
     return render_template('login.html')
 
+
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
@@ -69,6 +72,7 @@ def login_required(view):
         return view(**kwargs)
     return wrapped_view
 
+
 @bp.before_app_request
 def load_logged_in_user():
     user_id = session.get('user_id')
@@ -76,8 +80,9 @@ def load_logged_in_user():
         g.user = None
     else:
         g.user = get_db().execute(
-            'SELECT * FROM user WHERE id = ?', (user_id,)
+            'SELECT * FROM users WHERE id = ?', (user_id,)
         ).fetchone()
+
 
 @bp.route('/logout')
 def logout():
