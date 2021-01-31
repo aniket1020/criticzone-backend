@@ -1,5 +1,5 @@
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for, jsonify
+    Blueprint, flash, g, redirect, render_template, request, url_for, jsonify, session
 )
 from werkzeug.exceptions import abort
 
@@ -33,7 +33,7 @@ def show_movie(movie_id):
         if request.form['user_review'] and request.form['user_rating']:
             db.execute(
                 'INSERT INTO reviews values (?,?,?,?)',
-                (request.session['user_id'],movie_id,request.form['user_review'],request.form['user_rating'])
+                (session['user_id'],movie_id,request.form['user_review'],request.form['user_rating'])
             )
             db.commit()
         #Update Template
@@ -47,14 +47,14 @@ def show_movie(movie_id):
     elif request.method == 'PUT':
         db.execute(
             'UPDATE reviews SET user_review = ?, user_rating = ? where user_id = ? and movie_id = ?',
-            (request.form['user_review'],request.form['user_rating'],request.session['user_id'],movie_id,)
+            (request.form['user_review'],request.form['user_rating'],session['user_id'],movie_id,)
         )
         db.commit()
         #Update Template
     elif request.method == 'DELETE':
         db.execute(
             'DELETE from reviews where user_id = ? and movie_id = ?',
-            (request.session['user_id'], movie_id,)
+            (session['user_id'], movie_id,)
         )
         db.commit()
         # Update Template
@@ -64,13 +64,14 @@ def show_movie(movie_id):
 def show_wishlist():
     db = get_db()
     wishlist = db.execute(
-        'SELECT * from wishlist where user_id = ?',
-        (request.session['user_id'],)
+        'SELECT movie_id from wishlist where user_id = ?',
+        (session['user_id'],)
     ).fetchall()
     movies = []
-    for id in wishlist['movie_id']:
-        movies.append(db.execute('SELECT * from movies where movie_id = ?',(id,)))
+    for id in wishlist:
+        movies.append(db.execute('SELECT * from movies where movie_id = ?',(id['movie_id'],)))
     #render Template
+    print('Wishlist')
     return render_template('',vars = {'movies':movies})
 
 @bp.route('/wishlist/<int:movie_id>',methods=['POST','DELETE'])
@@ -80,19 +81,19 @@ def delete_movie_wishlist(movie_id):
         db = get_db()
         db.execute(
             'INSERT into wishlist values (?,?)',
-            (request.session['user_id'],movie_id,)
+            (session['user_id'],movie_id,)
         )
         db.commit()
     else:
         db = get_db()
         db.execute(
             'DELETE from wishlist where user_id = ? and movie_id = ?',
-            (request.session['user_id'], movie_id,)
+            (session['user_id'], movie_id,)
         )
         db.commit()
         wishlist = db.execute(
             'SELECT * from wishlist where user_id = ?',
-            (request.session['user_id'],)
+            (session['user_id'],)
         ).fetchall()
         movies = []
         for id in wishlist['movie_id']:

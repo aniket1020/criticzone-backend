@@ -44,12 +44,6 @@ values
 (5,'The Matrix 2','https://image.tmdb.org/t/p/original/8xEVAe84zlL9rkfYT6dZXero4KK.jpg','The Matrix Reloaded is a 2003 American science fiction action film written and directed by the Wachowskis, and produced by Joel Silver. It is a sequel to The Matrix, and the second installment in The Matrix film franchise. Reloaded premiered on May 7, 2003, in Westwood, Los Angeles, California, and had its worldwide release by Warner Bros','2016-05-05','Action',5),
 (6,'The Matrix 3','https://3.bp.blogspot.com/-fm8kIbgS5qg/UsLl8UAcbMI/AAAAAAAABVg/whK8p5otEzs/s1600/The+Matrix+Revolutions+(2003).jpg','The Matrix Revolutions is a 2003 American science fiction action film written and directed by the Wachowskis, and produced by Joel Silver. It was the third installment of The Matrix film franchise, released six months following The Matrix Reloaded. The film was released simultaneously in 108 territories on November 5, 2003','2016-05-05','Action',5);
 
-insert into users values
-(1,'aniket@critic.com','ABCD'),
-(2,'harshit@critic.com','ABCD'),
-(3,'swapnil@critic.com','ABCD'),
-(4,'shivam@critic.com','ABCD');
-
 insert into wishlist values
 (1,1),(1,2),(1,3),
 (2,3),(2,4),(2,5);
