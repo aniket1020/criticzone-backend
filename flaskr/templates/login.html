@@ -1,10 +1,14 @@
 <!doctype html>
 <html>
-<title>LOGIN PAGE</title>
+<title>LOGIN</title>
+<link rel="stylesheet" href="../static/styles.css">
 <body>
-    <div class="form">
+    <h1>Login</h1>
+    <div class="container">
         <form action="/auth/login" method="post">
+            <label for="user_email">Email-></label>
             <input type="email" name="user_email" placeholder="E-mail">
+            <label for="user_email">Password-></label>
             <input type="password" name="user_password" placeholder="Password" >
             <button type="submit">Login</button>
         </form>
