@@ -107,7 +107,7 @@ def show_wishlist():
     movies = []
     for id in wishlist:
         movies.append(db.execute('SELECT * from movies where movie_id = ?',(id['movie_id'],)))
-    return render_template('',vars = {'movies':movies})
+    return render_template('wishlist.html',vars = {'movies':movies})
 
 @bp.route('/wishlist/<int:movie_id>',methods=['POST','DELETE'])
 @login_required
@@ -133,5 +133,4 @@ def delete_movie_wishlist(movie_id):
         movies = []
         for id in wishlist['movie_id']:
             movies.append(db.execute('SELECT * from movies where movie_id = ?', (id,)))
-        # render Template
-        return render_template('', vars={'movies': movies})
+        return render_template('wishlist.html', vars={'movies': movies})
