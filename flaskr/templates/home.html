@@ -1,7 +1,29 @@
-<!doctype html>
-<html>
-<title>Landing Page</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="../static/navbar.css">
+   <title>CriticZone</title>
+</head>
 <body>
-      Landing Page
-   </body>
+   <!-- Navbar -->
+   <div class="container">
+      <div class="navbar">
+         <div id="LogoDiv">
+            CriticZone
+         </div>
+         <div id="LinksDiv">
+            <ul id="LinksMenu">
+               <li>Movies</li>
+               <li>Features</li>
+               <li><button id="Login" onclick="location.href = '/auth/login'">Login</button></li>
+               <li><button id="Register" onclick="location.href = '/auth/register'">Register</button></li>
+            </ul>
+         </div>
+      </div>
+   </div>
+   <!-- Navbar End -->
+   
+</body>
 </html>

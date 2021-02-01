@@ -1,0 +1,86 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  min-height: 1400px;
+  width: 100%;
+}
+.container{
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+.navbar{
+  position:fixed;
+  height: 100px;
+  color: white;
+  background-color: rgba(4, 15, 37, 0.9);
+  font-family: sans-serif;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.navbar > *{
+  align-items: center;
+  letter-spacing: 2px;
+  font-size: 25px;
+}
+
+#LogoDiv{
+  justify-content: center;
+  display: flex;
+  font-size: 40px;
+}
+
+#LinksDiv{
+  display: flex;
+  justify-content: center;
+}
+
+#LinksDiv > *{
+  line-height: 35px;
+  font-size: 25px;
+}
+
+#LinksMenu{
+  display: flex;
+  width: 100%;
+  flex-flow: row wrap;
+  list-style: none;
+  justify-content: space-around;
+  align-items: center;
+}
+#LinksMenu > *{
+  padding-right: 3vw;
+}
+#Login{
+  background-color:rgb(61, 187, 57);
+  color: white;
+  font-size: 20px;
+  padding: 10px;
+  width:150px;
+  font-family: sans-serif;
+  border-radius: 5px;
+  border-style: unset;
+}
+#Login:hover{
+  color: black;
+}
+#Register{
+  background-color:rgb(61, 187, 57);
+  color: white;
+  width:150px;
+  font-size: 20px;
+  padding: 10px;
+  font-family: sans-serif;
+  border-radius: 5px;
+  border-style: unset;
+}
+#Register:hover{
+  color: black;
+}
