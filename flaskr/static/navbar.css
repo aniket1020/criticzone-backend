@@ -14,9 +14,10 @@ body{
 }
 .navbar{
   position:fixed;
-  height: 100px;
+  height: 85px;
   color: white;
-  background-color: rgba(4, 15, 37, 0.9);
+  backdrop-filter: blur(10px);
+  background-color: rgba(4, 15, 37, 0.8);
   font-family: sans-serif;
   width: 100%;
   display: flex;
