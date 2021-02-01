@@ -16,8 +16,12 @@
               <ul id="LinksMenu">
                  <li>Movies</li>
                  <li>Features</li>
+                 {% if session['user_id'] %}
+                 <li><button id="Login" onclick="location.href = '/auth/logout'">Logout</button></li>
+                 {% else %}
                  <li><button id="Login" onclick="location.href = '/auth/login'">Login</button></li>
                  <li><button id="Register" onclick="location.href = '/auth/register'">Register</button></li>
+                 {%endif%}
               </ul>
            </div>
         </div>
@@ -27,7 +31,7 @@
             <div class="movie-con">
                 {% for movie in vars['movies'] %}
                 <div class="movie-card">
-                    <img src="{{ movie['movie_wallpaper'] }}"/>
+                    <img src="{{ movie['movie_wallpaper'] }}" onclick=" location.href = '/index/{{ movie['movie_id'] }}' "/>
                     <h3>{{movie['movie_name']}}</h3>
                 </div>
                 {% endfor %}

@@ -1,8 +1,27 @@
-<!doctype html>
-<html>
-<title>Movie Page</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="../static/navbar.css">
+   <title>Movie</title>
+</head>
 <body>
-      <h1>{{ vars['name'] }}!</h1>
-      <h2>MOVIE {{ vars['movie']['movie_name'] }}</h2>
-   </body>
+   <!-- Navbar -->
+   <div class="container">
+      <div class="navbar">
+         <div id="LogoDiv">
+            CriticZone
+         </div>
+         <div id="LinksDiv">
+            <ul id="LinksMenu">
+               <li><a href="/index" style="text-decoration: none; color: white;">Movies</a></li>
+               <li> <a href="#Features" style="text-decoration: none; color: white;"> Features</a></li>
+               <li><button id="Login" onclick="location.href = '/auth/login'">Login</button></li>
+               <li><button id="Register" onclick="location.href = '/auth/register'">Register</button></li>
+            </ul>
+         </div>
+      </div>
+   <!-- Navbar End -->
+</body>
 </html>
