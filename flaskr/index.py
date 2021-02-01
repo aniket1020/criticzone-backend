@@ -27,7 +27,11 @@ def show_movie(movie_id):
         reviews = db.execute(
             'SELECT * FROM reviews WHERE movie_id = ?',(movie_id,)
         ).fetchall()
-        #Render Template
+        movie_in_wishlist = db.execute(
+            'SELECT * FROM wishlist WHERE movie_id = ?',(movie_id,)
+        ).fetchone()
+        if movie_in_wishlist:
+            return render_template('movie.html', vars={'movie': movie, 'reviews': reviews,'wishlist':1})
         return render_template('movie.html',vars={'movie':movie,'reviews':reviews})
     elif request.method == 'POST':
         if request.form['user_review'] and request.form['user_rating']:
@@ -36,11 +40,22 @@ def show_movie(movie_id):
                 (session['user_id'],movie_id,request.form['user_review'],request.form['user_rating'])
             )
             db.commit()
-        #Update Template
+            movie = db.execute(
+                'SELECT * FROM movies WHERE movie_id = ?', (movie_id,)
+            ).fetchone()
+            reviews = db.execute(
+                'SELECT * FROM reviews WHERE movie_id = ?', (movie_id,)
+            ).fetchall()
+            movie_in_wishlist = db.execute(
+                'SELECT * FROM wishlist WHERE movie_id = ?', (movie_id,)
+            ).fetchone()
+            if movie_in_wishlist:
+                return render_template('movie.html', vars={'movie': movie, 'reviews': reviews, 'wishlist': 1})
+            return render_template('movie.html', vars={'movie': movie, 'reviews': reviews})
         else:
             db.execute(
-                'INSERT INTO reviews values (?,?)',
-                (request.session['user_id'],movie_id,)
+                'INSERT INTO wishlist values (?,?)',
+                (session['user_id'],movie_id,)
             )
             db.commit()
             #Update Template
@@ -50,14 +65,36 @@ def show_movie(movie_id):
             (request.form['user_review'],request.form['user_rating'],session['user_id'],movie_id,)
         )
         db.commit()
-        #Update Template
+        movie = db.execute(
+            'SELECT * FROM movies WHERE movie_id = ?', (movie_id,)
+        ).fetchone()
+        reviews = db.execute(
+            'SELECT * FROM reviews WHERE movie_id = ?', (movie_id,)
+        ).fetchall()
+        movie_in_wishlist = db.execute(
+            'SELECT * FROM wishlist WHERE movie_id = ?', (movie_id,)
+        ).fetchone()
+        if movie_in_wishlist:
+            return render_template('movie.html', vars={'movie': movie, 'reviews': reviews, 'wishlist': 1})
+        return render_template('movie.html', vars={'movie': movie, 'reviews': reviews})
     elif request.method == 'DELETE':
         db.execute(
             'DELETE from reviews where user_id = ? and movie_id = ?',
             (session['user_id'], movie_id,)
         )
         db.commit()
-        # Update Template
+        movie = db.execute(
+            'SELECT * FROM movies WHERE movie_id = ?', (movie_id,)
+        ).fetchone()
+        reviews = db.execute(
+            'SELECT * FROM reviews WHERE movie_id = ?', (movie_id,)
+        ).fetchall()
+        movie_in_wishlist = db.execute(
+            'SELECT * FROM wishlist WHERE movie_id = ?', (movie_id,)
+        ).fetchone()
+        if movie_in_wishlist:
+            return render_template('movie.html', vars={'movie': movie, 'reviews': reviews, 'wishlist': 1})
+        return render_template('movie.html', vars={'movie': movie, 'reviews': reviews})
 
 @bp.route('/wishlist',methods=['GET'])
 @login_required
@@ -70,8 +107,6 @@ def show_wishlist():
     movies = []
     for id in wishlist:
         movies.append(db.execute('SELECT * from movies where movie_id = ?',(id['movie_id'],)))
-    #render Template
-    print('Wishlist')
     return render_template('',vars = {'movies':movies})
 
 @bp.route('/wishlist/<int:movie_id>',methods=['POST','DELETE'])

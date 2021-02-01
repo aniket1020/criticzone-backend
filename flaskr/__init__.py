@@ -1,6 +1,7 @@
 import os
 
-from flask import Flask
+from flask import Flask, render_template
+
 
 def create_app(test_config=None):
     # create and configure the app
@@ -15,9 +16,15 @@ def create_app(test_config=None):
     from . import auth
     app.register_blueprint(auth.bp)
 
+    @app.route('/', methods=['GET'])
+    def landing_page():
+        return render_template('home.html')
+
     from . import index
     app.register_blueprint(index.bp)
     app.add_url_rule('/', endpoint='index')
+
+
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
