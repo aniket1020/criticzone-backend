@@ -5,52 +5,55 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="../static/navbar.css">
    <link rel="stylesheet" href="../static/movie.css">
-   <title>Movie</title>
+   <title>{{ vars['movie']['movie_name'] }}</title>
 </head>
 <body>
    <!-- Navbar -->
    <div class="container">
       <div class="navbar">
-         <div id="LogoDiv">
-            CriticZone
-         </div>
-         <div id="LinksDiv">
-            <ul id="LinksMenu">
-               <li><a href="/index" style="text-decoration: none; color: white;">Movies</a></li>
-               <li> <a href="#Features" style="text-decoration: none; color: white;"> Features</a></li>
-               <li><button id="Login" onclick="location.href = '/auth/login'">Login</button></li>
-               <li><button id="Register" onclick="location.href = '/auth/register'">Register</button></li>
-            </ul>
-         </div>
-      </div>
+           <div id="LogoDiv">
+            <a href="/" style="text-decoration: none; color: white;">CriticZone</a>  
+           </div>
+           <div id="LinksDiv">
+              <ul id="LinksMenu">
+                 <li>Movies</li>
+                 <li>Features</li>
+                 {% if session['user_id'] %}
+                 <li><button id="Login" onclick="location.href = '/wishlist'">Wishlist</button></li>
+                 <li><button id="Login" onclick="location.href = '/auth/logout'">Logout</button></li>
+                 {% else %}
+                 <li><button id="Login" onclick="location.href = '/auth/login'">Login</button></li>
+                 <li><button id="Register" onclick="location.href = '/auth/register'">Register</button></li>
+                 {%endif%}
+              </ul>
+           </div>
+        </div>
    </div>   
    <!-- Navbar End -->
-   <div class="movie-bg"></div>
+   <div class="movie-bg" style="background-image: url({{vars['movie']['movie_wallpaper']}});"></div>
    <div class="in-movie-bg">
-      <img src="https://i.ytimg.com/vi/PQdF1LWFkMs/maxresdefault.jpg" alt="N/A">
-      <h3>Iron Man 3</h3>
+      <img src="{{vars['movie']['movie_wallpaper']}}" alt="N/A">
+      <h3>{{vars['movie']['movie_name']}}</h3>
    </div>
    <h2 >Summary</h2>
-   <p class="sum">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Animi, ab iste. Soluta voluptatum excepturi distinctio incidunt reiciendis ex nobis deleniti, nostrum molestias quasi recusandae temporibus minus porro, cumque tenetur explicabo voluptate maiores eos doloremque fugiat ratione dolores aliquam? Ratione delectus consectetur nulla officia voluptatum labore perferendis sapiente, expedita repellat possimus?</p>
-   <button class="wish">Add to Wishlist</button>
+   <p class="sum">{{vars['movie']['movie_summary']}}</p>
+   <form action="/wishlist/{{vars['movie']['movie_id']}}" method="POST">
+      <button class="wish" type="submit">Add to Wishlist</button>
+   </form>
+   
    <h2>Reviews</h2>
    <div class="reviews">
       <ul>
-         <li><h3>first</h3><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, labore.</p></li>
-         <li><h3>first</h3><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, labore.</p></li>
-         <li><h3>first</h3><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, labore.</p></li>
-         <li><h3>first</h3><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, labore.</p></li>
-         <li><h3>first</h3><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, labore.</p></li>
-         <li><h3>first</h3><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, labore.</p></li>
-         <li><h3>first</h3><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, labore.</p></li>
-         <li><h3>first</h3><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, labore.</p></li>
-         <li><h3>first</h3><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, labore.</p></li>
-         <li><h3>first</h3><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, labore.</p></li>
+         {% for review in vars['reviews']%}
+         <li><h3>Rating {{review['user_rating']}}  </h3><p>"{{review['user_review']}}"</p></li>
+         {%endfor%}
       </ul>
    </div>
-   <form class="text" method="POST" action="">
-      <label for="tarea">Add Review:</label>
-      <textarea name="tarea" id="tarea" cols="50" rows="10"></textarea>
+   <form class="text" method="POST" action="/index/{{vars['movie']['movie_id']}}">
+      <label for="user_rating">Add Rating:</label>
+      <input type="number" name="user_rating" id="rating">
+      <label for="user_review">Add Review:</label>
+      <textarea name="user_review" id="tarea" cols="50" rows="10"></textarea>
       <button type="submit">Submit</button>
    </form>
 </body>

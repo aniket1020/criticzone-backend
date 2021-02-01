@@ -36,7 +36,7 @@ def show_movie(movie_id):
             return render_template('movie.html', vars={'movie': movie, 'reviews': reviews, 'wishlist': 1})
         return render_template('movie.html', vars={'movie': movie, 'reviews': reviews})
     elif request.method == 'POST':
-        if request.form['user_review'] and request.form['user_rating']:
+        if request.form['user_review'] or request.form['user_rating']:
             db.execute(
                 'INSERT INTO reviews values (?,?,?,?)',
                 (session['user_id'], movie_id,
@@ -112,11 +112,14 @@ def show_wishlist():
     movies = []
     for id in wishlist:
         movies.append(db.execute(
-            'SELECT * from movies where movie_id = ?', (id['movie_id'],)))
+            'SELECT * from movies where movie_id = ?', (id['movie_id'],)).fetchone()
+            )
+    print(movies)
+    print(movies[0]['movie_id'])
     return render_template('wishlist.html', vars={'movies': movies})
 
 
-@bp.route('/wishlist/<int:movie_id>', methods=['POST', 'DELETE'])
+@bp.route('/wishlist/<int:movie_id>', methods=['POST', 'GET'])
 @login_required
 def delete_movie_wishlist(movie_id):
     if request.method == 'POST':
@@ -126,6 +129,18 @@ def delete_movie_wishlist(movie_id):
             (session['user_id'], movie_id,)
         )
         db.commit()
+        movie = db.execute(
+            'SELECT * FROM movies WHERE movie_id = ?', (movie_id,)
+        ).fetchone()
+        reviews = db.execute(
+            'SELECT * FROM reviews WHERE movie_id = ?', (movie_id,)
+        ).fetchall()
+        movie_in_wishlist = db.execute(
+            'SELECT * FROM wishlist WHERE movie_id = ?', (movie_id,)
+        ).fetchone()
+        if movie_in_wishlist:
+            return render_template('movie.html', vars={'movie': movie, 'reviews': reviews, 'wishlist': 1})
+        return render_template('movie.html', vars={'movie': movie, 'reviews': reviews})
     else:
         db = get_db()
         db.execute(
@@ -133,12 +148,4 @@ def delete_movie_wishlist(movie_id):
             (session['user_id'], movie_id,)
         )
         db.commit()
-        wishlist = db.execute(
-            'SELECT * from wishlist where user_id = ?',
-            (session['user_id'],)
-        ).fetchall()
-        movies = []
-        for id in wishlist['movie_id']:
-            movies.append(db.execute(
-                'SELECT * from movies where movie_id = ?', (id,)))
-        return render_template('wishlist.html', vars={'movies': movies})
+        return redirect('/wishlist')

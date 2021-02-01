@@ -3,11 +3,9 @@
 <title>HOMEPAGE</title>
 <link rel="stylesheet" href="../static/browse.css">
 <link rel="stylesheet" href="../static/navbar.css">
-<script>
-
-</script>
 <body>
     <div class="container">
+       <!-- Navbar  -->
         <div class="navbar">
            <div id="LogoDiv">
             <a href="/" style="text-decoration: none; color: white;">CriticZone</a>  
@@ -17,6 +15,7 @@
                  <li>Movies</li>
                  <li>Features</li>
                  {% if session['user_id'] %}
+                 <li><button id="Login" onclick="location.href = '/wishlist'">Wishlist</button></li>
                  <li><button id="Login" onclick="location.href = '/auth/logout'">Logout</button></li>
                  {% else %}
                  <li><button id="Login" onclick="location.href = '/auth/login'">Login</button></li>

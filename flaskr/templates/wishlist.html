@@ -1,7 +1,47 @@
 <!doctype html>
 <html>
-<title>Wishlist</title>
-    <body>
-      Wishlist
-    </body>
+<title>HOMEPAGE</title>
+<link rel="stylesheet" href="../static/browse.css">
+<link rel="stylesheet" href="../static/navbar.css">
+<body>
+    <div class="container">
+       <!-- Navbar  -->
+        <div class="navbar">
+           <div id="LogoDiv">
+            <a href="/" style="text-decoration: none; color: white;">CriticZone</a>  
+           </div>
+           <div id="LinksDiv">
+              <ul id="LinksMenu">
+                 <li>Movies</li>
+                 <li>Features</li>
+                 {% if session['user_id'] %}
+                 <li><button id="Login" onclick="location.href = '/wishlist'">Wishlist</button></li>
+                 <li><button id="Login" onclick="location.href = '/auth/logout'">Logout</button></li>
+                 {% else %}
+                 <li><button id="Login" onclick="location.href = '/auth/login'">Login</button></li>
+                 <li><button id="Register" onclick="location.href = '/auth/register'">Register</button></li>
+                 {%endif%}
+              </ul>
+           </div>
+        </div>
+     </div>
+     <!-- Navbar End -->
+      <h1>{{ vars['movies'][0]['movie_name'] }}!</h1>
+            <div class="movie-con">
+                {% for movie in vars['movies'] %}
+                <form action="/wishlist/{{ movie['movie_id'] }}" class="movie-card" method="GET">
+                    <img id="card{{movie['movie_id']}}" src="{{ movie['movie_wallpaper'] }}"/>
+                    <h3>{{movie['movie_name']}}</h3>
+                    <button type="submit" id="visitMovie{{movie['movie_id']}}" class="deleteMovie">Remove</button>
+                </form>
+                {% endfor %}
+            </div>
+      <script>
+        {% for movie in vars['movies'] %}
+         document.getElementById("card{{movie['movie_id']}}").onmouseover = function(){
+            document.getElementById("visitMovie{{movie['movie_id']}}").style.display = block;
+         }
+        {%endfor%}
+      </script>
+   </body>
 </html>

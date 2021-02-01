@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap');
 * {
   margin: 0;
   padding: 0;
@@ -7,6 +8,8 @@
 }
 
 body {
+  font-family: 'Anonymous Pro';
+  font-size: 25px;
   display: flex;
   flex-direction: column;
   background-color: rgba(4, 15, 37, 0.9);
@@ -19,7 +22,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url(https://i.ytimg.com/vi/PQdF1LWFkMs/maxresdefault.jpg);
   background-size: cover;
   background-position: 20%;
   background-repeat: no-repeat;
@@ -69,10 +71,12 @@ h2:nth-of-type(2) {
   height: 500px;
   width: 100%;
   display: flex;
+  font-family: 'Anonymous Pro';
   justify-content: center;
 }
 
 .sum {
+  font-family: 'Anonymous Pro';
   padding: 0 300px;
   margin-top: 20px;
 }
@@ -137,6 +141,7 @@ h2:nth-of-type(2) {
 }
 
 .wish {
+  margin-top: 25px;
   color: aliceblue;
   margin-left: 825px;
   height: 40px;
@@ -152,4 +157,14 @@ h2:nth-of-type(2) {
 .wish:hover {
   background-color: rgb(50, 235, 127);
   color: black;
+}
+
+#rating{
+  width: 660px;
+  height: 40px;
+  color: black;
+  font-size: 25px;
+  padding: 0 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
