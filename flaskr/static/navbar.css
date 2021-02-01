@@ -5,11 +5,10 @@
 }
 body {
   min-height: 100vh;
-  width: 100%;
 }
 .container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: baseline;
 }
 .navbar {
@@ -17,7 +16,7 @@ body {
   height: 85px;
   color: white;
   backdrop-filter: blur(10px);
-  background-color: rgba(4, 15, 37, 0.8);
+  background-color: rgba(4, 15, 37, 0.9);
   font-family: sans-serif;
   width: 100%;
   display: flex;

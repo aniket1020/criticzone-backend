@@ -4,6 +4,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="../static/navbar.css">
+   <link rel="stylesheet" href="../static/home.css">
    <title>CriticZone</title>
 </head>
 <body>
@@ -15,15 +16,51 @@
          </div>
          <div id="LinksDiv">
             <ul id="LinksMenu">
-               <li>Movies</li>
-               <li>Features</li>
+               <li><a href="/index" style="text-decoration: none; color: white;">Movies</a></li>
+               <li> <a href="#Features" style="text-decoration: none; color: white;"> Features</a></li>
                <li><button id="Login" onclick="location.href = '/auth/login'">Login</button></li>
                <li><button id="Register" onclick="location.href = '/auth/register'">Register</button></li>
             </ul>
          </div>
       </div>
-   </div>
    <!-- Navbar End -->
-   <h1>Hello</h1>
+      <div class="row" style="margin-top: 85px;">
+         <div id="imgView">
+            <img class="Image" src="https://i.ytimg.com/vi/PQdF1LWFkMs/maxresdefault.jpg" alt="N/A">
+         </div>
+         <div class="txtView">
+         <h4>"I had the pleasure of watching the film premiere last night and it blew me away. The film delivers in both storyline, and visual effects. From start to finish you are thrown in to lots of action, twists and turns."<br>-User1234</h2>
+         </div>
+      </div>
+      <div class="row">
+         <div class="txtView">
+            <h4>"Personally I was extremely disappointed with this final movie. Infinity war was an amazing good movie, end game delivers a very simple story based on the time machine concept with plenty of flaws. "<br>-User5678</h2>
+            </div>
+         <div id="imgView">
+            <img class="Image" src="https://s1.ibtimes.com/sites/www.ibtimes.com/files/styles/embed/public/2019/04/08/avengersendgame-poster.jpg" alt="N/A">
+         </div>
+      </div>
+      <div class="row" style="flex-direction: column; align-items: center;">
+         <div class="width:75%">
+            <h1 id="Features" style="margin-left: 150px; font-size: 75px; color: rgb(223, 223, 17); margin-top: 50px;">Features</h1>
+         <div class="Feature">
+            <img style="max-height: 100px;" src="https://www.iconsdb.com/icons/preview/color/E6BA34/film-reel-xxl.png" alt="N/A">
+            <h1 style="margin-left: 50px;">Newly released Films !!! 😀</h1>
+         </div>
+         <div class="Feature">
+            <img style="max-height: 100px;" src="https://www.iconsdb.com/icons/preview/color/E6BA34/heart-69-xxl.png" alt="N/A">
+            <h1 style="margin-left: 50px;">Add to wishlist</h1>
+         </div>
+         <div class="Feature">
+            <img style="max-height: 100px;" src="https://www.iconsdb.com/icons/preview/color/E6BA34/check-mark-8-xxl.png" alt="N/A">
+            <h1 style="margin-left: 50px;">View reviews for a film</h1>
+         </div>
+         <div class="Feature">
+            <img style="max-height: 100px;" src="https://www.iconsdb.com/icons/preview/color/E6BA34/edit-2-xxl.png" alt="N/A">
+            <h1 style="margin-left: 50px;">Add your reviews for a film</h1>
+         </div>
+         </div>
+      </div>
+   </div>
 </body>
 </html>
