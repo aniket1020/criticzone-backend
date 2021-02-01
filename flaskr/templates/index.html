@@ -10,7 +10,7 @@
     <div class="container">
         <div class="navbar">
            <div id="LogoDiv">
-              CriticZone
+            <a href="/" style="text-decoration: none; color: white;">CriticZone</a>  
            </div>
            <div id="LinksDiv">
               <ul id="LinksMenu">
@@ -31,10 +31,18 @@
             <div class="movie-con">
                 {% for movie in vars['movies'] %}
                 <div class="movie-card">
-                    <img src="{{ movie['movie_wallpaper'] }}" onclick=" location.href = '/index/{{ movie['movie_id'] }}' "/>
+                    <img id="card{{movie['movie_id']}}" src="{{ movie['movie_wallpaper'] }}" onclick=" location.href = '/index/{{ movie['movie_id'] }}' "/>
                     <h3>{{movie['movie_name']}}</h3>
+                    <button id="visitMovie{{movie['movie_id']}}" style="display: none; position: absolute;" class="visitMovie">Visit Page</button>
                 </div>
                 {% endfor %}
-            </div> 
+            </div>
+      <script>
+        {% for movie in vars['movies'] %}
+         document.getElementById("card{{movie['movie_id']}}").onmouseover = function(){
+            document.getElementById("visitMovie{{movie['movie_id']}}").style.display = block;
+         }
+        {%endfor%}
+      </script>
    </body>
 </html>
