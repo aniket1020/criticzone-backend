@@ -1,14 +1,36 @@
 <!doctype html>
 <html>
 <title>HOMEPAGE</title>
+<link rel="stylesheet" href="../static/browse.css">
+<link rel="stylesheet" href="../static/navbar.css">
+<script>
+
+</script>
 <body>
+    <div class="container">
+        <div class="navbar">
+           <div id="LogoDiv">
+              CriticZone
+           </div>
+           <div id="LinksDiv">
+              <ul id="LinksMenu">
+                 <li>Movies</li>
+                 <li>Features</li>
+                 <li><button id="Login" onclick="location.href = '/auth/login'">Login</button></li>
+                 <li><button id="Register" onclick="location.href = '/auth/register'">Register</button></li>
+              </ul>
+           </div>
+        </div>
+     </div>
+     <!-- Navbar End -->
       <h1>{{ vars['name'] }}!</h1>
-      <h2>MOVIES</h2>
-        {% for movie in vars['movies'] %}
-            <div>
-                <img src="{{ movie['movie_wallpaper'] }}"/>
-                {{ movie['movie_name'] }}
-            </div>
-        {% endfor %}
+            <div class="movie-con">
+                {% for movie in vars['movies'] %}
+                <div class="movie-card">
+                    <img src="{{ movie['movie_wallpaper'] }}"/>
+                    <h3>{{movie['movie_name']}}</h3>
+                </div>
+                {% endfor %}
+            </div> 
    </body>
 </html>

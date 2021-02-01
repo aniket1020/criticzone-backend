@@ -1,0 +1,61 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url(../static/pexels-johannes-plenio-1103970.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  order: 1;
+  flex-basis: 10%;
+  margin-top: 100px;
+  line-height: 150px;
+  align-self: center;
+  color: rgb(255, 255, 255);
+  letter-spacing: 2px;
+}
+
+h3 {
+  padding-top: 4px;
+  text-align: center;
+  color: rgb(7, 7, 7);
+  letter-spacing: 2px;
+}
+.movie-con {
+  display: flex;
+  order: 2;
+  flex-basis: 90%;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+  z-index: -1;
+}
+
+.movie-con > .movie-card > img {
+  height: 250px;
+  width: 200px;
+  border-radius: 5px;
+  object-fit: cover;
+  transition: all 0.2s ease-in-out;
+}
+
+.movie-con > .movie-card {
+  height: 250px;
+  width: 200px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(0 0 1.2rem rgba(0, 0, 0, 0.568));
+}
+
+.movie-con > .movie-card:hover > img {
+  filter: blur(5px);
+}
