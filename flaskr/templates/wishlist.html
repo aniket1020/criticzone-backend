@@ -12,8 +12,8 @@
            </div>
            <div id="LinksDiv">
               <ul id="LinksMenu">
-                 <li>Movies</li>
-                 <li>Features</li>
+                 <li><a href="/index" style="text-decoration: none; color: white;">Movies</a></li>
+                  <li> <a href="#Features" style="text-decoration: none; color: white;"> Features</a></li>
                  {% if session['user_id'] %}
                  <li><button id="Login" onclick="location.href = '/wishlist'">Wishlist</button></li>
                  <li><button id="Login" onclick="location.href = '/auth/logout'">Logout</button></li>
