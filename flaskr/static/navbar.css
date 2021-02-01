@@ -1,19 +1,19 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-body{
-  min-height: 1400px;
+body {
+  min-height: 100vh;
   width: 100%;
 }
-.container{
+.container {
   display: flex;
   flex-direction: row;
   align-items: baseline;
 }
-.navbar{
-  position:fixed;
+.navbar {
+  position: fixed;
   height: 85px;
   color: white;
   backdrop-filter: blur(10px);
@@ -26,29 +26,29 @@ body{
   align-items: center;
 }
 
-.navbar > *{
+.navbar > * {
   align-items: center;
   letter-spacing: 2px;
   font-size: 25px;
 }
 
-#LogoDiv{
+#LogoDiv {
   justify-content: center;
   display: flex;
   font-size: 40px;
 }
 
-#LinksDiv{
+#LinksDiv {
   display: flex;
   justify-content: center;
 }
 
-#LinksDiv > *{
+#LinksDiv > * {
   line-height: 35px;
   font-size: 25px;
 }
 
-#LinksMenu{
+#LinksMenu {
   display: flex;
   width: 100%;
   flex-flow: row wrap;
@@ -56,32 +56,32 @@ body{
   justify-content: space-around;
   align-items: center;
 }
-#LinksMenu > *{
+#LinksMenu > * {
   padding-right: 3vw;
 }
-#Login{
-  background-color:rgb(61, 187, 57);
+#Login {
+  background-color: rgb(61, 187, 57);
   color: white;
   font-size: 20px;
   padding: 10px;
-  width:150px;
+  width: 150px;
   font-family: sans-serif;
   border-radius: 5px;
   border-style: unset;
 }
-#Login:hover{
+#Login:hover {
   color: black;
 }
-#Register{
-  background-color:rgb(61, 187, 57);
+#Register {
+  background-color: rgb(61, 187, 57);
   color: white;
-  width:150px;
+  width: 150px;
   font-size: 20px;
   padding: 10px;
   font-family: sans-serif;
   border-radius: 5px;
   border-style: unset;
 }
-#Register:hover{
+#Register:hover {
   color: black;
 }
