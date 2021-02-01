@@ -6,10 +6,15 @@
     <h1>Register</h1>
     <div class="container">
         <form action="/auth/register" method="post">
-            <label for="user_email">Email-></label>
-            <input type="email" name="user_email" placeholder="E-mail">
-            <label for="user_email">Password-></label>
-            <input type="password" name="user_password" placeholder="Password" >
+            <span></span>
+            <div>
+                <label for="user_email">Email</label>
+                <input type="email" name="user_email" placeholder="E-mail">
+            </div>
+            <div>
+                <label for="user_password">Password</label>
+                <input type="password" name="user_password" placeholder="Password" >
+            </div>
             <button type="submit">Register</button>
         </form>
     </div>
