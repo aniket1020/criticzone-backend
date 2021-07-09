@@ -1,1 +1,1 @@
-## Run `bash init.sh` before running flask run
+### Run `bash init.sh` before running flask run
